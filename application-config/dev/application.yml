@@ -1,0 +1,8 @@
+server:
+  port: 8080
+
+spring:
+  rabbitmq:
+    host: rabbitmq-service
+    username: ${RABBITMQ_USERNAME}
+    password: ${RABBITMQ_PASSWORD}

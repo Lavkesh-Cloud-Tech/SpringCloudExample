@@ -1,0 +1,9 @@
+#Zuul Proxy settings
+zuul:
+  prefix: /proxy
+  ignoredServices: "*"  
+  routes: 
+    security-service: 
+      path: /secSer/**
+      
+name: lavkesh 
