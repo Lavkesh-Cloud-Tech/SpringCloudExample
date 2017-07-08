@@ -1,0 +1,5 @@
+spring:
+  application:
+    name: ${APPLICATION_NAME:eureka-server}
+  profiles:
+    active: local

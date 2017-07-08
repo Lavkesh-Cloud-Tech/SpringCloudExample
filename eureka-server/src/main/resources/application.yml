@@ -1,0 +1,28 @@
+server:
+  port: 8080
+  context-path: /registry
+
+# Eureka Server Settings
+eureka:
+  instance:
+    prefer-ip-address: true
+    hostname: eureka-server
+  client:
+    registerWithEureka: false
+    fetchRegistry: false
+    serviceUrl:
+      defaultZone: http://${eureka.instance.hostname}:${server.port}${server.context-path}/
+  server:
+    wait-time-in-ms-when-sync-empty: 0
+
+# Spring Security Settings
+security:
+  basic:
+    enabled: true
+  user:
+    name: ${REGISTRY_USERNAME}
+    password: ${REGISTRY_PASSWORD}
+
+# Logging
+logging:
+  config: classpath:logback.xml

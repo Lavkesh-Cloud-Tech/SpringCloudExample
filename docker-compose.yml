@@ -1,0 +1,17 @@
+version: '2'
+
+services:
+  eureka-server:
+    image: "${EUREKA_IMAGE_NAME}:${EUREKA_IMAGE_VERSION}"
+    ports:
+      - "8080"
+    environment:
+      - APPLICATION_NAME=eureka-server
+      - SPRING_PROFILES_ACTIVE
+      - REGISTRY_USERNAME
+      - REGISTRY_PASSWORD
+
+networks:
+  default:
+    external:
+      name: my-first-bridge-network
