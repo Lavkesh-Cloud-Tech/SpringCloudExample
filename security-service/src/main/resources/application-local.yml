@@ -1,0 +1,12 @@
+server:
+  port: 8764
+  context-path: /security-service
+
+# Management Configuration
+management:
+  port: 9764
+  context-path: /manage
+
+endpoints:
+  enabled: true
+  sensitive: false

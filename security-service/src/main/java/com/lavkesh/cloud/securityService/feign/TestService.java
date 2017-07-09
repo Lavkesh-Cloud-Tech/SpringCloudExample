@@ -1,4 +1,4 @@
-package com.lavkesh.cloud.testService.feign;
+package com.lavkesh.cloud.securityService.feign;
 
 import org.springframework.cloud.netflix.feign.FeignClient;
 import org.springframework.web.bind.annotation.RequestMapping;

@@ -1,4 +1,4 @@
-package com.lavkesh.cloud.testService.modal;
+package com.lavkesh.cloud.securityService.modal;
 
 import javax.validation.constraints.NotNull;
 
