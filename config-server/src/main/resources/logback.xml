@@ -17,7 +17,7 @@
     </encoder>
   </appender>
 
-  <!-- Setting the com.lavkesh.cloud level of logging to INFO -->
+  <!-- Setting the com.lavkesh.cloud level of logging to DEBUG -->
   <logger level="debug" name="com.lavkesh.cloud">
     <appender-ref ref="FILE"/>
   </logger>

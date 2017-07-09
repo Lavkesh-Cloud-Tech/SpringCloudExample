@@ -1,0 +1,45 @@
+server:
+  port: 8080
+  context-path: /config
+
+# Config server eureka registration
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    registry-fetch-interval-seconds: 20
+    serviceUrl:
+      defaultZone: http://${REGISTRY_USERNAME}:${REGISTRY_PASSWORD}@eureka-server:8080/registry/eureka/
+
+# Config server git configuaration
+spring:
+  cloud:
+    bus:
+      destination: test-bus
+    config:
+      server:
+        git:
+          uri: ${GIT_CONFIG_URL}
+          searchPaths: 'application-config/{profile},application-config/{profile}/{application}'
+  rabbitmq:
+    host: rabbitmq-server
+    port: 5672
+    username: ${RABBITMQ_USERNAME}
+    password: ${RABBITMQ_PASSWORD}
+
+# Management console
+management:
+  context-path: /manage
+  port: 9080
+
+endpoints:
+  enabled: false
+  sensitive: true
+
+# Logging
+logging:
+  config: classpath:logback.xml
+
+# Encrypt Key For Config
+encrypt:
+  key: 36E2D4954B9F6EFB2BC397D1D3CBD

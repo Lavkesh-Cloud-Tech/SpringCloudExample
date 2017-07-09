@@ -1,0 +1,5 @@
+spring:
+  application:
+    name: ${APPLICATION_NAME:config-server}
+  profiles:
+    active: local

@@ -1,6 +1,18 @@
 version: '2'
 
 services:
+
+  rabbitmq-server:
+    image: "${RABBITMQ_IMAGE_NAME}:${RABBITMQ_IMAGE_VERSION}"
+    ports:
+      - "5672"
+      - "15672"
+    environment:
+      - RABBITMQ_USERNAME
+      - RABBITMQ_PASSWORD_HASH
+    networks:
+      - my-network
+
   eureka-server:
     image: "${EUREKA_IMAGE_NAME}:${EUREKA_IMAGE_VERSION}"
     ports:
@@ -10,8 +22,25 @@ services:
       - SPRING_PROFILES_ACTIVE
       - REGISTRY_USERNAME
       - REGISTRY_PASSWORD
+    networks:
+      - my-network
+
+  config-server:
+    image: "${CONFIG_SERVER_IMAGE_NAME}:${CONFIG_SERVER_IMAGE_VERSION}"
+    ports:
+      - "8080"
+      - "9080"
+    environment:
+      - APPLICATION_NAME=config-server
+      - SPRING_PROFILES_ACTIVE
+      - REGISTRY_USERNAME
+      - REGISTRY_PASSWORD
+      - GIT_CONFIG_URL
+      - RABBITMQ_USERNAME
+      - RABBITMQ_PASSWORD
+    networks:
+      - my-network
 
 networks:
-  default:
-    external:
-      name: my-first-bridge-network
+  my-network:
+    driver: bridge
