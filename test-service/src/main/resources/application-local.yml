@@ -1,0 +1,12 @@
+server:
+  port: 8763
+  context-path: /test-service
+
+# Management Configuration
+management:
+  port: 9763
+  context-path: /manage
+
+endpoints:
+  enabled: true
+  sensitive: false

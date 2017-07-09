@@ -1,6 +1,3 @@
-server:
-  port: 8763
-
 # Eureka config for local
 eureka:
   client:
@@ -16,12 +13,3 @@ spring:
     # Disable RabbitMQ Server Configuration
     bus:
       enabled: false
-
-# Management Configuration
-management:
-  port: 9763
-  context-path: /manage
-
-endpoints:
-  enabled: true
-  sensitive: false
