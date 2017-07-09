@@ -16,8 +16,8 @@ apply plugin: 'idea'
 apply plugin: 'org.springframework.boot'
 
 jar {
-    archiveName = 'security-service.jar'
-    baseName = 'security-service'
+    archiveName = 'test-service.jar'
+    baseName = 'test-service'
     version = '0.0.1'
 }
 
