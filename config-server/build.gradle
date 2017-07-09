@@ -42,9 +42,7 @@ dependencies {
     compile 'org.springframework.cloud:spring-cloud-config-server'
     compile 'org.springframework.cloud:spring-cloud-starter-eureka'
     compile 'org.springframework.cloud:spring-cloud-starter-bus-amqp'
-    testCompile("org.springframework.boot:spring-boot-starter-test") {
-        exclude module: "commons-logging"
-    }
+    testCompile 'org.springframework.boot:spring-boot-starter-test'
 }
 
 task wrapper(type: Wrapper) {
