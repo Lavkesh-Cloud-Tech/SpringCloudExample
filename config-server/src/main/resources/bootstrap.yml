@@ -15,6 +15,7 @@ spring:
           uri: ${GIT_CONFIG_URL}
           searchPaths: 'application-config/{profile},application-config/{profile}/{application}'
         bootstrap: true
+        default-label: ${CONFIG_LABEL:master}
       name: ${spring.application.name}
 
 # Encrypt Key For Config
