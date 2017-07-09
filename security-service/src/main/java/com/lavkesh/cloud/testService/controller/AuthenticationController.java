@@ -1,7 +1,7 @@
-package com.lavkesh.cloud.securityService.controller;
+package com.lavkesh.cloud.testService.controller;
 
-import com.lavkesh.cloud.securityService.feign.TestService;
-import com.lavkesh.cloud.securityService.modal.LoginForm;
+import com.lavkesh.cloud.testService.feign.TestService;
+import com.lavkesh.cloud.testService.modal.LoginForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;

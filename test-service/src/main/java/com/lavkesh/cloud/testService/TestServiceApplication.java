@@ -1,4 +1,4 @@
-package com.lavkesh.cloud.securityService;
+package com.lavkesh.cloud.testService;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -7,10 +7,10 @@ import org.springframework.cloud.netflix.feign.EnableFeignClients;
 
 @SpringBootApplication
 @EnableEurekaClient
-@EnableFeignClients(basePackages = "com.lavkesh.cloud.securityService.feign")
-public class SecurityServerApplication {
+@EnableFeignClients(basePackages = "com.lavkesh.cloud.testService.feign")
+public class TestServiceApplication {
 
   public static void main(String[] args) {
-    SpringApplication.run(SecurityServerApplication.class, args);
+    SpringApplication.run(TestServiceApplication.class, args);
   }
 }

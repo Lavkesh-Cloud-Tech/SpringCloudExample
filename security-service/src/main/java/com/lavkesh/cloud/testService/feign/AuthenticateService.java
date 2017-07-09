@@ -1,6 +1,6 @@
-package com.lavkesh.cloud.securityService.feign;
+package com.lavkesh.cloud.testService.feign;
 
-import com.lavkesh.cloud.securityService.modal.LoginForm;
+import com.lavkesh.cloud.testService.modal.LoginForm;
 import org.springframework.cloud.netflix.feign.FeignClient;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;

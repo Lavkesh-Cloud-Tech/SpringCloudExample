@@ -1,4 +1,4 @@
-package com.lavkesh.cloud.securityService.controller;
+package com.lavkesh.cloud.testService.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;

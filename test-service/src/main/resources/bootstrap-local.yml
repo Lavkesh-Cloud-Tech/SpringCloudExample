@@ -1,24 +1,19 @@
 server:
   port: 8763
 
-# Disable eureka for local
+# Eureka config for local
 eureka:
-  instance:
-    lease-renewal-interval-in-seconds: 10
-    lease-expiration-duration-in-seconds: 30
-    prefer-ip-address: true
   client:
-    registry-fetch-interval-seconds: 20
     serviceUrl:
       defaultZone: http://${REGISTRY_USERNAME}:${REGISTRY_PASSWORD}@localhost:8761/registry/eureka/
     register-with-eureka: false
 
-# RabbitMQ Configuration
+# Config Server Configuration
 spring:
   cloud:
     config:
-      server:
-        bootstrap: false
+      uri: http://localhost:8762/config
+    # Disable RabbitMQ Server Configuration
     bus:
       enabled: false
 
@@ -30,7 +25,3 @@ management:
 endpoints:
   enabled: true
   sensitive: false
-
-# Logging
-logging:
-  config: classpath:logback.xml

@@ -1,4 +1,4 @@
-package com.lavkesh.cloud.securityService;
+package com.lavkesh.cloud.testService;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
