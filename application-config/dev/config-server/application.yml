@@ -1,0 +1,17 @@
+server:
+  context-path: /config
+
+# Management console
+management:
+  context-path: /manage
+  port: 9080
+
+endpoints:
+  enabled: false
+  sensitive: true
+  health:
+    enabled: true
+  info:
+    enabled: true
+    sensitive: false
+
