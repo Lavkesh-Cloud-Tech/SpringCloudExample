@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-IMAGE_NAME=lavkesh/eureka_registry_server
+IMAGE_NAME=lavkesh/eureka-server
 IMAGE_VERSION=$1
 
 echo "======================== Start build eureka-server ====================="
