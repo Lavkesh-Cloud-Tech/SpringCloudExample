@@ -47,8 +47,6 @@ services:
     environment:
       - APPLICATION_NAME=test-service
       - SPRING_PROFILES_ACTIVE
-      - REGISTRY_USERNAME
-      - REGISTRY_PASSWORD
     networks:
       - my-network
 
@@ -60,8 +58,6 @@ services:
     environment:
       - APPLICATION_NAME=security-service
       - SPRING_PROFILES_ACTIVE
-      - REGISTRY_USERNAME
-      - REGISTRY_PASSWORD
     networks:
       - my-network
 
