@@ -33,11 +33,7 @@ services:
     environment:
       - APPLICATION_NAME=config-server
       - SPRING_PROFILES_ACTIVE
-      - REGISTRY_USERNAME
-      - REGISTRY_PASSWORD
       - GIT_CONFIG_URL
-      - RABBITMQ_USERNAME
-      - RABBITMQ_PASSWORD
     networks:
       - my-network
 

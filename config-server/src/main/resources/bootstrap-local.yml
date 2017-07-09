@@ -1,0 +1,30 @@
+server:
+  port: 8762
+  context-path: /config
+
+# Disable eureka for local
+eureka:
+  client:
+    enabled: false
+
+# RabbitMQ Configuration
+spring:
+  cloud:
+    config:
+      server:
+        bootstrap: false
+    bus:
+      enabled: false
+
+# Management Configuration
+management:
+  port: 9762
+  context-path: /manage
+
+endpoints:
+  enabled: true
+  sensitive: false
+
+# Logging
+logging:
+  config: classpath:logback.xml

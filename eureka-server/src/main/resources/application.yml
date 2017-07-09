@@ -7,6 +7,8 @@ eureka:
   instance:
     prefer-ip-address: true
     hostname: eureka-server
+    lease-expiration-duration-in-seconds: 30
+    lease-renewal-interval-in-seconds: 10
   client:
     registerWithEureka: false
     fetchRegistry: false
