@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: security-service
+  cloud:
+    bus:
+      destination: test-bus
+    config:
+      discovery:
+        service-id: config-server
+        enabled: true
+      name: ${spring.application.name}
+
+# Encrypt Key For Config
+encrypt:
+  key: 36E2D4954B9F6EFB2BC397D1D3CBD
