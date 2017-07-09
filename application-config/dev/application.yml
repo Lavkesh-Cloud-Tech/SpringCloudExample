@@ -4,5 +4,5 @@ server:
 spring:
   rabbitmq:
     host: rabbitmq-service
-    username: ${RABBITMQ_USERNAME}
-    password: ${RABBITMQ_PASSWORD}
+    username: '{cipher}aa29e7afa964ff8ca553ba41734fae7856f60dd82e0bbe8750fff7318b051adc'
+    password: '{cipher}b3f58fb72b724c23955f29b11d0872aea3b6b1246f63300231adbcbd3dacfb44'
