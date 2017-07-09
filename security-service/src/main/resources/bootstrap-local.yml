@@ -1,5 +1,5 @@
 server:
-  port: 8762
+  port: 8764
 
 # Disable eureka for local
 eureka:
@@ -24,7 +24,7 @@ spring:
 
 # Management Configuration
 management:
-  port: 9762
+  port: 9764
   context-path: /manage
 
 endpoints:

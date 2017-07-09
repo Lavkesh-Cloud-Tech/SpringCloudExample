@@ -3,7 +3,7 @@ version: '2'
 services:
 
   rabbitmq-server:
-    image: "${RABBITMQ_IMAGE_NAME}:${RABBITMQ_IMAGE_VERSION}"
+    image: "lavkesh/rabbitmq-server:${RABBITMQ_IMAGE_VERSION}"
     ports:
       - "5672"
       - "15672"
@@ -14,7 +14,7 @@ services:
       - my-network
 
   eureka-server:
-    image: "${EUREKA_IMAGE_NAME}:${EUREKA_IMAGE_VERSION}"
+    image: "lavkesh/eureka-server:${EUREKA_IMAGE_VERSION}"
     ports:
       - "8080"
     environment:
@@ -26,7 +26,7 @@ services:
       - my-network
 
   config-server:
-    image: "${CONFIG_SERVER_IMAGE_NAME}:${CONFIG_SERVER_IMAGE_VERSION}"
+    image: "lavkesh/config-server:${CONFIG_SERVER_IMAGE_VERSION}"
     ports:
       - "8080"
       - "9080"
@@ -34,6 +34,34 @@ services:
       - APPLICATION_NAME=config-server
       - SPRING_PROFILES_ACTIVE
       - GIT_CONFIG_URL
+      - REGISTRY_USERNAME
+      - REGISTRY_PASSWORD
+    networks:
+      - my-network
+
+  test-service:
+    image: "lavkesh/test-service:${TEST_SERVICE_IMAGE_VERSION}"
+    ports:
+      - "8080"
+      - "9080"
+    environment:
+      - APPLICATION_NAME=test-service
+      - SPRING_PROFILES_ACTIVE
+      - REGISTRY_USERNAME
+      - REGISTRY_PASSWORD
+    networks:
+      - my-network
+
+  security-service:
+    image: "lavkesh/security-service:${SECURITY_SERVICE_IMAGE_VERSION}"
+    ports:
+      - "8080"
+      - "9080"
+    environment:
+      - APPLICATION_NAME=security-service
+      - SPRING_PROFILES_ACTIVE
+      - REGISTRY_USERNAME
+      - REGISTRY_PASSWORD
     networks:
       - my-network
 
