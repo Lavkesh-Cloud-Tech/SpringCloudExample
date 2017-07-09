@@ -20,6 +20,21 @@ eureka:
     serviceUrl:
       defaultZone: http://${REGISTRY_USERNAME}:${REGISTRY_PASSWORD}@eureka-server:8080/registry/eureka/
 
+# Management console
+management:
+  context-path: /manage
+  port: 9080
+
+endpoints:
+  enabled: false
+  sensitive: true
+  health:
+    enabled: true
+    sensitive: false
+  info:
+    enabled: true
+    sensitive: false
+
 # Logging
 logging:
   config: classpath:logback.xml

@@ -16,8 +16,8 @@ apply plugin: 'idea'
 apply plugin: 'org.springframework.boot'
 
 jar {
-    archiveName = 'eureka_discovery_server.jar'
-    baseName = 'eureka_discovery_server'
+    archiveName = 'eureka-server.jar'
+    baseName = 'eureka-server'
     version = '0.0.1'
 }
 
