@@ -1,14 +1,3 @@
-# Eureka Configuration
-eureka:
-  instance:
-    lease-renewal-interval-in-seconds: 20
-    lease-expiration-duration-in-seconds: 60
-    prefer-ip-address: true
-  client:
-    registry-fetch-interval-seconds: 20
-    serviceUrl:
-      defaultZone: http://${REGISTRY_USERNAME}:${REGISTRY_PASSWORD}@eureka-server:8080/registry/eureka/
-
 # Config Server Configuration
 spring:
   application:
@@ -28,6 +17,7 @@ spring:
           searchPaths: 'application-config/{profile},application-config/{profile}/{application}'
         bootstrap: true
         default-label: ${CONFIG_LABEL:master}
+        prefix:
       name: ${spring.application.name}
 
 # Encrypt Key For Config
