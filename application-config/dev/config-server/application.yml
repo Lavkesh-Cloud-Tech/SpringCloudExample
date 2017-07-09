@@ -7,10 +7,11 @@ management:
   port: 9080
 
 endpoints:
-  enabled: true
+  enabled: false
   sensitive: true
   health:
     enabled: true
+    sensitive: false
   info:
     enabled: true
     sensitive: false
