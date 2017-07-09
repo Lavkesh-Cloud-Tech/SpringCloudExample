@@ -1,4 +1,4 @@
-#Zuul Proxy settings
+# Zuul Proxy settings
 zuul:
   prefix: /proxy
   ignoredServices: "*"  
