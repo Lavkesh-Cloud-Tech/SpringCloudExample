@@ -1,0 +1,14 @@
+src/*
+build/*
+gradle/*
+.gradle/*
+!build/libs/*
+build/libs/*.original
+
+.dockerignore
+.gitignore
+build.gradle
+build.sh
+Dockerfile
+gradlew
+gradlew.bat

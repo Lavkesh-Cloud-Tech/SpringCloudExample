@@ -1,0 +1,12 @@
+server:
+  port: 8765
+  context-path: /api
+
+# Management Configuration
+management:
+  port: 9765
+  context-path: /manage
+
+endpoints:
+  enabled: true
+  sensitive: false
