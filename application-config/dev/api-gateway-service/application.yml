@@ -4,4 +4,5 @@ server:
 # Zuul Proxy settings
 zuul:
   strip-prefix: false
-  ignored-services: [ 'config-sever' ]
+  ignored-services:
+   - 'config-sever'
