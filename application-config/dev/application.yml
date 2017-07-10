@@ -36,7 +36,3 @@ endpoints:
   info:
     enabled: true
     sensitive: false
-
-# Logging
-logging:
-  config: classpath:logback.xml

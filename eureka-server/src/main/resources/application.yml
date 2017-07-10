@@ -24,7 +24,3 @@ security:
   user:
     name: ${REGISTRY_USERNAME}
     password: ${REGISTRY_PASSWORD}
-
-# Logging
-logging:
-  config: classpath:logback.xml
