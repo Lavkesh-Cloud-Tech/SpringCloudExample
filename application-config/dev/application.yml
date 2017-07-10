@@ -10,8 +10,6 @@ eureka:
     lease-renewal-interval-in-seconds: 20
     lease-expiration-duration-in-seconds: 60
     prefer-ip-address: true
-    metadata-map:
-      server.context-path: ${server.context-path}
   client:
     registry-fetch-interval-seconds: 20
     serviceUrl:
