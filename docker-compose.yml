@@ -61,6 +61,17 @@ services:
     networks:
       - my-network
 
+  api-gateway-service:
+    image: "lavkesh/api-gateway-service:${API_GATEWAY_SERVICE_IMAGE_VERSION}"
+    ports:
+      - "8080"
+      - "9080"
+    environment:
+      - APPLICATION_NAME=api-gateway-service
+      - SPRING_PROFILES_ACTIVE
+    networks:
+      - my-network
+
 networks:
   my-network:
     driver: bridge
