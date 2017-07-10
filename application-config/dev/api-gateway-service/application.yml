@@ -1,12 +1,7 @@
+server:
+  context-path: /api
+
 # Zuul Proxy settings
 zuul:
-  prefix: /api
-  strip-prefix: true
-#  ignoredServices: "*"
-  routes:
-    security-service:
-      path: /secure/**
-      serviceId: security-service
-    test-service:
-      path: /test/**
-      serviceId: test-service
+  strip-prefix: false
+  ignored-services: [ 'config-sever' ]
