@@ -4,16 +4,12 @@ eureka:
     serviceUrl:
       defaultZone: http://${REGISTRY_USERNAME}:${REGISTRY_PASSWORD}@localhost:8761/registry/eureka/
     register-with-eureka: false
-  instance:
-    lease-renewal-interval-in-seconds:
 
-# Config Server Configuration
 spring:
   cloud:
+    # Disable Config Server Configuration
     config:
-      uri: http://localhost:8762/config
+      enabled: false
     # Disable RabbitMQ Server Configuration
     bus:
       enabled: false
-zuul:
-  ignored-services:

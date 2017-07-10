@@ -4,5 +4,13 @@ server:
 # Zuul Proxy settings
 zuul:
   strip-prefix: false
-  ignored-services:
-    ? 'config-sever'
+  ignored-services: 'config-server'
+  routes:
+    security-service:
+      serviceId: security-service
+      path: /security-service/**
+      stripPrefix: false
+    test-service:
+      serviceId: test-service
+      path: /test-service/**
+      stripPrefix: false
