@@ -2,6 +2,11 @@ server:
   port: 8763
   context-path: /test-service
 
+# Disable Eureka server
+eureka:
+  client:
+    enabled: false
+
 # Management Configuration
 management:
   port: 9763

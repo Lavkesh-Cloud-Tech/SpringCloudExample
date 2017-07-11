@@ -2,6 +2,8 @@
 spring:
   application:
     name: test-service
+  profiles:
+    active: local
   cloud:
     bus:
       destination: test-bus

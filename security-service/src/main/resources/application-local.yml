@@ -10,3 +10,6 @@ management:
 endpoints:
   enabled: true
   sensitive: false
+
+test-service:
+  ribbon.listOfServers: http://localhost:8763

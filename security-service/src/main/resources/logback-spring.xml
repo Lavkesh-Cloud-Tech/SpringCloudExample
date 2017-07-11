@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+  <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+
+  <springProperty scope="context" name="LOG_FILE_NAME_PREFIX" source="spring.application.name"/>
+  <property name="LOG_FILE" value="${LOG_PATH:-/var/app_log}/application-${LOG_FILE_NAME_PREFIX}.log"/>
+
+  <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+    <!-- configure filter to limit console output -->
+    <encoder>
+      <pattern>${CONSOLE_LOG_PATTERN}</pattern>
+      <charset>utf8</charset>
+    </encoder>
+  </appender>
+
+  <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <encoder>
+      <pattern>${FILE_LOG_PATTERN}</pattern>
+    </encoder>
+    <file>${LOG_FILE}</file>
+    <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+      <fileNamePattern>${LOG_FILE}.%d{yyyy-MM-dd}.%i.gz</fileNamePattern>
+      <maxFileSize>10MB</maxFileSize>
+      <maxHistory>90</maxHistory>
+    </rollingPolicy>
+  </appender>
+
+  <springProfile name="local, dev, qa">
+    <!-- Setting the com.lavkesh.cloud level of logging to DEBUG -->
+    <logger name="com.lavkesh.cloud" level="DEBUG"/>
+
+    <!-- Setting the com.springframework level of logging to DEBUG -->
+    <logger name="org.springframework.web" level="DEBUG"/>
+    <logger name="org.springframework.cloud.netflix.eureka" level="DEBUG"/>
+    <logger name="org.springframework.boot.actuate" level="DEBUG"/>
+  </springProfile>
+
+  <springProfile name="staging, production">
+    <!-- Setting the com.lavkesh.cloud level of logging to INFO -->
+    <logger name="com.lavkesh.cloud" level="DEBUG"/>
+
+    <!-- Setting the com.springframework level of logging to INFO -->
+    <logger name="org.springframework.web" level="INFO"/>
+    <logger name="org.springframework.cloud.netflix.eureka" level="INFO"/>
+    <logger name="org.springframework.boot.actuate" level="INFO"/>
+  </springProfile>
+
+  <!-- Setting the root level of logging to INFO -->
+  <root level="INFO">
+    <appender-ref ref="CONSOLE"/>
+    <appender-ref ref="FILE"/>
+  </root>
+</configuration>

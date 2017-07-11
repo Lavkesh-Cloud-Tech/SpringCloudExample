@@ -7,6 +7,7 @@ eureka:
 
 # Management console
 management:
+  context-path: /manage
   port: 9761
 
 endpoints:
