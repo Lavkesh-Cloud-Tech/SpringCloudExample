@@ -1,7 +1,9 @@
 # Config Server Configuration
 spring:
   application:
-    name: api-gateway-service
+    name: ${APPLICATION_NAME:api-gateway-service}
+  profiles:
+    active: local
   cloud:
     bus:
       destination: test-bus

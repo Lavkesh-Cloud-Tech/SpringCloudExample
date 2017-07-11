@@ -1,6 +1,3 @@
-server:
-  context-path: /test-service
-
 lavkesh:
   application:
     name: Dev - Spring Cloud Demo 1

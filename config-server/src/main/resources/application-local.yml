@@ -1,6 +1,5 @@
 server:
   port: 8762
-  context-path: /config
 
 # Disable eureka for local
 eureka:

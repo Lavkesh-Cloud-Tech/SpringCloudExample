@@ -1,6 +1,10 @@
 server:
   port: 8765
-  context-path: /api
+
+# Disable Eureka server
+eureka:
+  client:
+    enabled: false
 
 # Management Configuration
 management:
@@ -13,14 +17,13 @@ endpoints:
 
 # Zuul Proxy settings
 zuul:
-  strip-prefix: false
   ignored-services: 'config-server'
   routes:
     security-service:
-      serviceId: security-service
       path: /security-service/**
+      url: http://localhost:8764
       stripPrefix: false
     test-service:
-      serviceId: test-service
       path: /test-service/**
+      url: http://localhost:8763
       stripPrefix: false

@@ -1,6 +1,5 @@
 server:
   port: 8763
-  context-path: /test-service
 
 # Disable Eureka server
 eureka:

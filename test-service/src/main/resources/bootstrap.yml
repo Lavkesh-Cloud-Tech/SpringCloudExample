@@ -1,7 +1,7 @@
 # Config Server Configuration
 spring:
   application:
-    name: test-service
+    name: ${APPLICATION_NAME:test-service}
   profiles:
     active: local
   cloud:
