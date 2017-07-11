@@ -4,11 +4,9 @@ import javax.validation.constraints.NotNull;
 
 public class LoginForm {
 
-  @NotNull
-  public String username;
+  @NotNull public String username;
 
-  @NotNull
-  public String password;
+  @NotNull public String password;
 
   public String getUsername() {
     return username;
@@ -25,5 +23,4 @@ public class LoginForm {
   public void setPassword(String password) {
     this.password = password;
   }
-
 }
