@@ -6,9 +6,7 @@ server:
 eureka:
   instance:
     prefer-ip-address: true
-    hostname: eureka-server
-    lease-expiration-duration-in-seconds: 60
-    lease-renewal-interval-in-seconds: 20
+    hostname: ${spring.application.name}
   client:
     registerWithEureka: false
     fetchRegistry: false
@@ -24,3 +22,18 @@ security:
   user:
     name: ${REGISTRY_USERNAME}
     password: ${REGISTRY_PASSWORD}
+
+# Management console
+management:
+  context-path: /manage
+  port: 9080
+
+endpoints:
+  enabled: false
+  sensitive: true
+  health:
+    enabled: true
+    sensitive: false
+  info:
+    enabled: true
+    sensitive: false

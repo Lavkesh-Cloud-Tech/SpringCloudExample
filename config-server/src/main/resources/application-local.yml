@@ -1,0 +1,12 @@
+server:
+  port: 8762
+  context-path: /config
+
+# Management Configuration
+management:
+  port: 9762
+  context-path: /manage
+
+endpoints:
+  enabled: true
+  sensitive: false
