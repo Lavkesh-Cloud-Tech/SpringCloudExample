@@ -11,10 +11,15 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RefreshScope
+@RequestMapping(
+  produces = MediaType.APPLICATION_JSON_VALUE,
+  consumes = MediaType.APPLICATION_JSON_VALUE
+)
 public class AuthenticationController {
 
   @Value("${application.username}")
@@ -25,11 +30,7 @@ public class AuthenticationController {
 
   @Autowired private TestService testService;
 
-  @GetMapping(
-    value = "/usernameAndPassword",
-    produces = MediaType.APPLICATION_JSON_VALUE,
-    consumes = MediaType.APPLICATION_JSON_VALUE
-  )
+  @GetMapping(value = "/usernameAndPassword")
   public Map<String, String> getUsernameAndPassword() {
     Map<String, String> map = new HashedMap();
     map.put("username", username);
@@ -37,11 +38,7 @@ public class AuthenticationController {
     return map;
   }
 
-  @PostMapping(
-    value = "/authenticate",
-    produces = MediaType.APPLICATION_JSON_VALUE,
-    consumes = MediaType.APPLICATION_JSON_VALUE
-  )
+  @PostMapping(value = "/authenticate")
   public Map<String, Boolean> authenticate(@RequestBody LoginForm loginForm) {
     boolean authenticate = false;
     if (username.equals(loginForm.getUsername()) && password.equals(loginForm.getPassword())) {
@@ -53,11 +50,7 @@ public class AuthenticationController {
     return map;
   }
 
-  @GetMapping(
-    value = "/applicationName",
-    produces = MediaType.APPLICATION_JSON_VALUE,
-    consumes = MediaType.APPLICATION_JSON_VALUE
-  )
+  @GetMapping(value = "/applicationName")
   public Map<String, String> getApplicationName() {
     return testService.getApplicationName();
   }
