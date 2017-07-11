@@ -42,13 +42,15 @@ public class AuthenticationController {
     produces = MediaType.APPLICATION_JSON_VALUE,
     consumes = MediaType.APPLICATION_JSON_VALUE
   )
-  public boolean authenticate(@RequestBody LoginForm loginForm) {
-
+  public Map<String, Boolean> authenticate(@RequestBody LoginForm loginForm) {
+    boolean authenticate = false;
     if (username.equals(loginForm.getUsername()) && password.equals(loginForm.getPassword())) {
-      return true;
+      authenticate = true;
     }
 
-    return false;
+    Map<String, Boolean> map = new HashedMap();
+    map.put("authenticate", authenticate);
+    return map;
   }
 
   @GetMapping(
