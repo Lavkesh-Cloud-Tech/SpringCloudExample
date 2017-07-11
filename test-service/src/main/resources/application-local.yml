@@ -15,3 +15,5 @@ management:
 endpoints:
   enabled: true
   sensitive: false
+
+lavkesh.application.name: test

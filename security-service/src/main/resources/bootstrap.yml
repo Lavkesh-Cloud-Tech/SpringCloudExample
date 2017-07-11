@@ -1,7 +1,9 @@
 # Config Server Configuration
 spring:
   application:
-    name: security-service
+    name: ${APPLICATION_NAME:security-service}
+  profiles:
+    active: local
   cloud:
     bus:
       destination: test-bus
