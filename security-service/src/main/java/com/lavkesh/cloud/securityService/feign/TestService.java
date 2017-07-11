@@ -1,16 +1,17 @@
 package com.lavkesh.cloud.securityService.feign;
 
+import java.util.Map;
 import org.springframework.cloud.netflix.feign.FeignClient;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.GetMapping;
 
 @FeignClient(value = "test-service", path = "/test-service")
 public interface TestService {
 
-  @RequestMapping(
+  @GetMapping(
     value = "/applicationName",
-    method = RequestMethod.GET,
-    consumes = "application/json"
+    produces = MediaType.APPLICATION_JSON_VALUE,
+    consumes = MediaType.APPLICATION_JSON_VALUE
   )
-  String getApplicationName();
+  Map<String, String> getApplicationName();
 }

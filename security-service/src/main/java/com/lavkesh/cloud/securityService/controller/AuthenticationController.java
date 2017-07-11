@@ -2,6 +2,8 @@ package com.lavkesh.cloud.securityService.controller;
 
 import com.lavkesh.cloud.securityService.feign.TestService;
 import com.lavkesh.cloud.securityService.modal.LoginForm;
+import java.util.Map;
+import org.apache.commons.collections.map.HashedMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
@@ -9,12 +11,10 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RefreshScope
-@RequestMapping(produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 public class AuthenticationController {
 
   @Value("${application.username}")
@@ -25,12 +25,23 @@ public class AuthenticationController {
 
   @Autowired private TestService testService;
 
-  @RequestMapping("/usernameAndPassword")
-  public String getUsernameAndPassword() {
-    return "{username : " + username + ", passowrd : " + password + "}";
+  @GetMapping(
+    value = "/usernameAndPassword",
+    produces = MediaType.APPLICATION_JSON_VALUE,
+    consumes = MediaType.APPLICATION_JSON_VALUE
+  )
+  public Map<String, String> getUsernameAndPassword() {
+    Map<String, String> map = new HashedMap();
+    map.put("username", username);
+    map.put("password", password);
+    return map;
   }
 
-  @PostMapping(path = "/authenticate")
+  @PostMapping(
+    value = "/authenticate",
+    produces = MediaType.APPLICATION_JSON_VALUE,
+    consumes = MediaType.APPLICATION_JSON_VALUE
+  )
   public boolean authenticate(@RequestBody LoginForm loginForm) {
 
     if (username.equals(loginForm.getUsername()) && password.equals(loginForm.getPassword())) {
@@ -40,8 +51,12 @@ public class AuthenticationController {
     return false;
   }
 
-  @GetMapping(value = "/applicationName")
-  public String getApplicationName() {
+  @GetMapping(
+    value = "/applicationName",
+    produces = MediaType.APPLICATION_JSON_VALUE,
+    consumes = MediaType.APPLICATION_JSON_VALUE
+  )
+  public Map<String, String> getApplicationName() {
     return testService.getApplicationName();
   }
 }

@@ -1,5 +1,7 @@
 package com.lavkesh.cloud.securityService.controller;
 
+import java.util.Map;
+import org.apache.commons.collections.map.HashedMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
@@ -20,7 +22,9 @@ public class TestController {
   private String applicationName;
 
   @GetMapping(value = "/applicationName")
-  String getApplicationName() {
-    return "{applicationName: " + applicationName + "}";
+  Map<String, String> getApplicationName() {
+    Map<String, String> map = new HashedMap();
+    map.put("applicationName", applicationName);
+    return map;
   }
 }
