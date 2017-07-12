@@ -1,2 +1,7 @@
 server:
   context-path: /config
+
+endpoints:
+  bus:
+    enabled: true
+    sensitive: false
