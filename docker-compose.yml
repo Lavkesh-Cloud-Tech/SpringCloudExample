@@ -39,7 +39,7 @@ services:
     networks:
       - my-network
 
-  test-service:
+  test-service-app:
     image: "lavkesh/test-service:${TEST_SERVICE_IMAGE_VERSION}"
     ports:
       - "8080"
@@ -50,7 +50,7 @@ services:
     networks:
       - my-network
 
-  security-service:
+  security-service-app:
     image: "lavkesh/security-service:${SECURITY_SERVICE_IMAGE_VERSION}"
     ports:
       - "8080"
@@ -61,7 +61,7 @@ services:
     networks:
       - my-network
 
-  api-gateway-service:
+  api-gateway-service-app:
     image: "lavkesh/api-gateway-service:${API_GATEWAY_SERVICE_IMAGE_VERSION}"
     ports:
       - "8080"
