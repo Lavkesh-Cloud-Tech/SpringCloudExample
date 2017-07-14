@@ -40,6 +40,8 @@ dependencies {
 	compile 'org.springframework.cloud:spring-cloud-starter-feign'
 	compile 'org.springframework.cloud:spring-cloud-starter-sleuth'
 	compile 'org.springframework.boot:spring-boot-starter-actuator'
+	compile 'org.springframework.boot:spring-boot-starter-aop'
+	compile 'org.springframework.retry:spring-retry:1.2.1.RELEASE'
 
 	testCompile 'org.springframework.boot:spring-boot-starter-test'
 }

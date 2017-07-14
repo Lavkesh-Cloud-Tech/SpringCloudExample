@@ -1,26 +1,15 @@
 server:
   port: 8080
 
-# Config server eureka registration
-REGISTRY_USERNAME: '{cipher}6a39d0c1dec83828a9b760d0f8d992739c45bc0c57e0878b826ed2176b8166e1'
-REGISTRY_PASSWORD: '{cipher}f9f19c9f985661f59f751e02a32b0b3e7c6d0112dbce5064a8e3773028460994'
-
-eureka:
-  instance:
-    lease-renewal-interval-in-seconds: 20
-    lease-expiration-duration-in-seconds: 60
-    prefer-ip-address: true
-  client:
-    registry-fetch-interval-seconds: 20
-    serviceUrl:
-      defaultZone: http://${REGISTRY_USERNAME}:${REGISTRY_PASSWORD}@eureka-server:8080/registry/eureka/
-
 # RabbitMQ Configuaration
 spring:
   rabbitmq:
     host: rabbitmq-server
     username: '{cipher}aa29e7afa964ff8ca553ba41734fae7856f60dd82e0bbe8750fff7318b051adc'
     password: '{cipher}b3f58fb72b724c23955f29b11d0872aea3b6b1246f63300231adbcbd3dacfb44'
+  cloud:
+    bus:
+      destination: test-bus
 
 # Management console
 management:

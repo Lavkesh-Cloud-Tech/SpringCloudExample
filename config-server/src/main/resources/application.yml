@@ -5,3 +5,26 @@ endpoints:
   bus:
     enabled: true
     sensitive: false
+
+# Eureka Server registration
+eureka:
+  instance:
+    lease-renewal-interval-in-seconds: 20
+    lease-expiration-duration-in-seconds: 60
+    prefer-ip-address: true
+    metadataMap:
+      user: ${CONFIG_SERVER_USERNAME}
+      password: ${CONFIG_SERVER_PASSWORD}
+      configPath: ${server.context-path}
+  client:
+    registry-fetch-interval-seconds: 20
+    serviceUrl:
+      defaultZone: http://${REGISTRY_USERNAME}:${REGISTRY_PASSWORD}@eureka-server:8080/registry/eureka/
+
+# Spring Security Settings
+security:
+  basic:
+    enabled: true
+  user:
+    name: ${CONFIG_SERVER_USERNAME}
+    password: ${CONFIG_SERVER_PASSWORD}

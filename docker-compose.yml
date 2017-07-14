@@ -25,7 +25,7 @@ services:
     networks:
       - my-network
 
-  config-server:
+  config-server-app:
     image: "lavkesh/config-server:${CONFIG_SERVER_IMAGE_VERSION}"
     ports:
       - "8080"
@@ -36,10 +36,12 @@ services:
       - GIT_CONFIG_URL
       - REGISTRY_USERNAME
       - REGISTRY_PASSWORD
+      - CONFIG_SERVER_USERNAME
+      - CONFIG_SERVER_PASSWORD
     networks:
       - my-network
 
-  test-service:
+  test-service-app:
     image: "lavkesh/test-service:${TEST_SERVICE_IMAGE_VERSION}"
     ports:
       - "8080"
@@ -47,10 +49,12 @@ services:
     environment:
       - APPLICATION_NAME=test-service
       - SPRING_PROFILES_ACTIVE
+      - REGISTRY_USERNAME
+      - REGISTRY_PASSWORD
     networks:
       - my-network
 
-  security-service:
+  security-service-app:
     image: "lavkesh/security-service:${SECURITY_SERVICE_IMAGE_VERSION}"
     ports:
       - "8080"
@@ -58,10 +62,12 @@ services:
     environment:
       - APPLICATION_NAME=security-service
       - SPRING_PROFILES_ACTIVE
+      - REGISTRY_USERNAME
+      - REGISTRY_PASSWORD
     networks:
       - my-network
 
-  api-gateway-service:
+  api-gateway-service-app:
     image: "lavkesh/api-gateway-service:${API_GATEWAY_SERVICE_IMAGE_VERSION}"
     ports:
       - "8080"
@@ -69,6 +75,8 @@ services:
     environment:
       - APPLICATION_NAME=api-gateway-service
       - SPRING_PROFILES_ACTIVE
+      - REGISTRY_USERNAME
+      - REGISTRY_PASSWORD
     networks:
       - my-network
 
