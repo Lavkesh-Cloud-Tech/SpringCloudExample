@@ -28,10 +28,12 @@ You need to install below software on your machine.
 You can compile project by running below command
 
 ```
-./build-all.sh <DOCKER_TAG>
+./build-all.sh 1.0
 ```
 
-Above command will compile project and create docker image for it.
+Above command will compile project and create docker image for it. `1.0` is docker tag.
+
+If you update docker tag then you need to update Docker Image Version info in **.env** file.
 
 You can run below command in steps to start application:
 
