@@ -62,4 +62,4 @@ It will list down all services that are get register with eureka server.
 
 ## License
 
-This project is licensed under the GNU General Public License v3.0 - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under the GNU General Public License v3.0 - see the [LICENSE.md](https://github.com/Lavkesh-Cloud-Tech/SpringCloudExample/blob/master/LICENSE) file for details
