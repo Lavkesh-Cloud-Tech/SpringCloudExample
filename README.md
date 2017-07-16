@@ -12,7 +12,7 @@ In this Microservice POC, I used Spring Boot and Netflix OSS to implement micros
 To get started, please run below command to clone repository on your machine
 
 ```
-git clone https://github.com/kbastani/spring-cloud-microservice-example
+git clone https://github.com/Lavkesh-Cloud-Tech/SpringCloudExample.git
 ```
 
 ### Prerequisites
