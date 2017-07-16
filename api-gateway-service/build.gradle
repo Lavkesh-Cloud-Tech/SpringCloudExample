@@ -5,6 +5,7 @@ buildscript {
 	repositories {
 		mavenLocal()
 		mavenCentral()
+		jcenter()
 	}
 	dependencies {
 		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
@@ -24,6 +25,7 @@ jar {
 repositories {
 	mavenLocal()
 	mavenCentral()
+	jcenter()
 }
 
 sourceCompatibility=1.8
