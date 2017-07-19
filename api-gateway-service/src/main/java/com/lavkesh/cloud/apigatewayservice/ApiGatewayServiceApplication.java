@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.feign.EnableFeignClients;
 import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
 
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = "com.lavkesh.cloud")
 @EnableFeignClients
 @EnableZuulProxy
 public class ApiGatewayServiceApplication {

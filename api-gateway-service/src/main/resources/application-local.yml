@@ -28,3 +28,10 @@ zuul:
       path: /test-service/**
       url: http://localhost:8763
       stripPrefix: false
+
+authentication:
+  jwt-path-to-skip:
+    - '${server.context-path}/security-service/login'
+    - '${server.context-path}/security-service/logout'
+  jwt-authentication-path:
+    - '${server.context-path}/**'

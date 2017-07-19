@@ -21,3 +21,20 @@ test-service:
 application:
   username: user
   password: password
+
+lavkesh:
+  security:
+    enabled: true
+    jwt-path-to-skip:
+      - '/login'
+      - '/logout'
+    jwt-authentication-path:
+      - '/**'
+    ajax-authentication-path:
+      - '/login'
+    jwt:
+      tokenExpirationTime: 5
+      refreshTokenExpTime: 10
+      tokenIssuer: 'Security Service'
+      privateKeyPath: 'privatekey.der'
+      publicKeyPath: 'pubkey.der'

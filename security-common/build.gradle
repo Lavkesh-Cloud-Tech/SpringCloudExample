@@ -16,12 +16,16 @@ apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'idea'
 apply plugin: 'org.springframework.boot'
+apply plugin: 'maven-publish'
+
+group = 'lavkesh.spring-cloud-tech'
 
 jar {
-    archiveName = 'security-service.jar'
-    baseName = 'security-service'
-    version = '0.0.1'
+    archiveName = 'security-common.jar'
+    baseName = 'security-common'
 }
+
+bootRepackage.enabled = false
 
 repositories {
     mavenLocal()
@@ -43,17 +47,23 @@ dependencyManagement {
 }
 
 dependencies {
-    compile 'lavkesh.spring-cloud-tech:security-common:1.0'
-
     compile 'org.springframework.boot:spring-boot-starter-web'
-    compile 'org.springframework.cloud:spring-cloud-starter-feign'
-    compile 'org.springframework.cloud:spring-cloud-starter-eureka'
     compile 'org.springframework.cloud:spring-cloud-starter-config'
     compile 'org.springframework.cloud:spring-cloud-starter-bus-amqp'
-    compile 'org.springframework.cloud:spring-cloud-starter-sleuth'
-    compile 'org.springframework.boot:spring-boot-starter-actuator'
+    compile 'org.springframework.boot:spring-boot-starter-security'
+
+    compile 'io.jsonwebtoken:jjwt:0.7.0'
+    compile 'org.apache.commons:commons-lang3:3.6'
 
     testCompile 'org.springframework.boot:spring-boot-starter-test'
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+        }
+    }
 }
 
 task wrapper(type: Wrapper) {
