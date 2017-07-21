@@ -1,3 +1,6 @@
 lavkesh:
   application:
     name: Dev - Spring Cloud Demo 3
+
+lavkesh:
+  name: test demo
