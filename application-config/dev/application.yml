@@ -36,3 +36,6 @@ endpoints:
   info:
     enabled: true
     sensitive: false
+
+lavkesh:
+  name: test
