@@ -1,9 +1,9 @@
 package com.lavkesh.cloud.security.auth.jwt;
 
-import com.lavkesh.cloud.security.config.JwtSettings;
-import com.lavkesh.cloud.security.model.JwtToken;
+import com.lavkesh.cloud.security.config.AuthenticationConfig;
 import com.lavkesh.cloud.security.model.RawAccessJwtToken;
 import com.lavkesh.cloud.security.model.UserContext;
+import com.lavkesh.cloud.security.util.CommonUtils;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import java.security.Key;
@@ -24,16 +24,14 @@ import org.springframework.util.Assert;
 public class JwtAuthenticationProvider implements AuthenticationProvider {
 
   @Autowired
-  private JwtSettings jwtSettings;
-
-  public JwtAuthenticationProvider() {
-  }
+  private AuthenticationConfig jwtSettings;
+  private Key publicKey;
 
   @Override
   public Authentication authenticate(Authentication authentication) throws AuthenticationException {
     RawAccessJwtToken rawAccessToken = (RawAccessJwtToken) authentication.getCredentials();
 
-    Key publicKey = jwtSettings.getPublicKey();
+    Key publicKey = getPublicKey();
     Assert.notNull(publicKey, "Public key is empty.");
 
     Jws<Claims> jwsClaims = rawAccessToken.parseClaims(publicKey);
@@ -43,7 +41,7 @@ public class JwtAuthenticationProvider implements AuthenticationProvider {
     return new JwtAuthenticationToken(context, context.getAuthorities());
   }
 
-  protected UserContext createUserContext(Jws<Claims> jwsClaims){
+  protected UserContext createUserContext(Jws<Claims> jwsClaims) {
     Claims body = jwsClaims.getBody();
     String subject = body.getSubject();
     List<String> scopes = body.get("scopes", List.class);
@@ -59,5 +57,13 @@ public class JwtAuthenticationProvider implements AuthenticationProvider {
   @Override
   public boolean supports(Class<?> authentication) {
     return (JwtAuthenticationToken.class.isAssignableFrom(authentication));
+  }
+
+  public Key getPublicKey() {
+    if (publicKey == null) {
+      String publicKeyPath = jwtSettings.getPublicKeyPath();
+      publicKey = CommonUtils.getPublicKey(publicKeyPath);
+    }
+    return publicKey;
   }
 }

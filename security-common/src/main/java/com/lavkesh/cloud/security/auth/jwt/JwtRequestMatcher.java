@@ -17,37 +17,47 @@ import org.springframework.stereotype.Component;
 @ConditionalOnMissingBean(JwtRequestMatcher.class)
 public class JwtRequestMatcher implements RequestMatcher {
 
+  private static final String DEFAULT_JWT_AUTHENTICATION_FILTER = "/**";
+
   @Autowired
   private AuthenticationConfig authenticationConfig;
 
-  private OrRequestMatcher matchers;
-
+  private RequestMatcher anonymousMatchers;
   private RequestMatcher processingMatcher;
 
   @EventListener
   public void handleContextRefresh(ContextRefreshedEvent event) {
-    List<String> jwtPathToSkip = authenticationConfig.getJwtPathToSkip();
+    List<String> anonymousPath = authenticationConfig.getAnonymousPath();
     List<RequestMatcher> m =
-        jwtPathToSkip
+        anonymousPath
             .stream()
             .map(path -> new AntPathRequestMatcher(path))
             .collect(Collectors.toList());
-    matchers = new OrRequestMatcher(m);
+    anonymousMatchers = new OrRequestMatcher(m);
 
-    List<String> jwtAuthenticationPath = authenticationConfig.getJwtAuthenticationPath();
+    List<String> jwtAuthenticationPath = authenticationConfig.getAuthenticationPath();
     List<RequestMatcher> pM =
         jwtAuthenticationPath
             .stream()
             .map(path -> new AntPathRequestMatcher(path))
             .collect(Collectors.toList());
+    if (pM.size() == 0) {
+      pM.add(new AntPathRequestMatcher(DEFAULT_JWT_AUTHENTICATION_FILTER));
+    }
     processingMatcher = new OrRequestMatcher(pM);
   }
 
   @Override
   public boolean matches(HttpServletRequest request) {
-    if (matchers.matches(request)) {
+    boolean enableJwtAuthentication = authenticationConfig.isEnableJwtAuthentication();
+    if (!enableJwtAuthentication) {
       return false;
     }
+
+    if(anonymousMatchers.matches(request)){
+      return false;
+    }
+
     return processingMatcher.matches(request) ? true : false;
   }
 }

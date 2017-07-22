@@ -4,47 +4,45 @@ import java.util.ArrayList;
 import java.util.List;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
-import org.springframework.stereotype.Component;
 
 @ConfigurationProperties(prefix = "lavkesh.security")
-@Component
 @RefreshScope
 public class AuthenticationConfig {
 
-  private List<String> jwtPathToSkip = new ArrayList<>();
-  private List<String> jwtAuthenticationPath = new ArrayList<>();
-  private List<String> ajaxAuthenticationPath = new ArrayList<>();
-  private boolean enableAjaxAuthentication = true;
+  private boolean enableJwtAuthentication = true;
+  private List<String> anonymousPath = new ArrayList<>();
+  private List<String> authenticationPath = new ArrayList<>();
+  private String publicKeyPath;
 
-  public List<String> getJwtPathToSkip() {
-    return jwtPathToSkip;
+  public boolean isEnableJwtAuthentication() {
+    return enableJwtAuthentication;
   }
 
-  public void setJwtPathToSkip(List<String> jwtPathToSkip) {
-    this.jwtPathToSkip = jwtPathToSkip;
+  public void setEnableJwtAuthentication(boolean enableJwtAuthentication) {
+    this.enableJwtAuthentication = enableJwtAuthentication;
   }
 
-  public List<String> getJwtAuthenticationPath() {
-    return jwtAuthenticationPath;
+  public List<String> getAnonymousPath() {
+    return anonymousPath;
   }
 
-  public void setJwtAuthenticationPath(List<String> jwtAuthenticationPath) {
-    this.jwtAuthenticationPath = jwtAuthenticationPath;
+  public void setAnonymousPath(List<String> anonymousPath) {
+    this.anonymousPath = anonymousPath;
   }
 
-  public List<String> getAjaxAuthenticationPath() {
-    return ajaxAuthenticationPath;
+  public List<String> getAuthenticationPath() {
+    return authenticationPath;
   }
 
-  public void setAjaxAuthenticationPath(List<String> ajaxAuthenticationPath) {
-    this.ajaxAuthenticationPath = ajaxAuthenticationPath;
+  public void setAuthenticationPath(List<String> authenticationPath) {
+    this.authenticationPath = authenticationPath;
   }
 
-  public boolean isEnableAjaxAuthentication() {
-    return enableAjaxAuthentication;
+  public String getPublicKeyPath() {
+    return publicKeyPath;
   }
 
-  public void setEnableAjaxAuthentication(boolean enableAjaxAuthentication) {
-    this.enableAjaxAuthentication = enableAjaxAuthentication;
+  public void setPublicKeyPath(String publicKeyPath) {
+    this.publicKeyPath = publicKeyPath;
   }
 }

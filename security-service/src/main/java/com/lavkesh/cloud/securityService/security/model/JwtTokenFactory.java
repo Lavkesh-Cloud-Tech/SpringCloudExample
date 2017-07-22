@@ -1,6 +1,5 @@
 package com.lavkesh.cloud.securityService.security.model;
 
-import com.lavkesh.cloud.security.config.JwtSettings;
 import com.lavkesh.cloud.security.model.JwtToken;
 import com.lavkesh.cloud.security.model.Scopes;
 import com.lavkesh.cloud.security.model.UserContext;
@@ -18,22 +17,24 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Component;
 
-/** Created by RATHIL on 7/19/2017. */
+/**
+ * Created by RATHIL on 7/19/2017.
+ */
 @Component
 public class JwtTokenFactory {
 
-  @Autowired private JwtSettings settings;
+  protected final Log logger = LogFactory.getLog(getClass());
 
-  /**
-   * Factory method for issuing new JWT Tokens.
-   *
-   * @param userContext
-   * @return
-   */
+  @Autowired
+  private AjaxAuthenticationConfig settings;
+  private Key privateKey;
+
   public JwtToken createAccessJwtToken(UserContext userContext) {
     if (StringUtils.isBlank(userContext.getUsername())) {
       throw new IllegalArgumentException("Cannot create JWT Token without username");
@@ -56,7 +57,7 @@ public class JwtTokenFactory {
     Integer Offset = settings.getTokenExpirationTime();
     Date expirationDate = CommonUtils.getCurrentTimeWithOffsetInUtc(Offset, ChronoUnit.MINUTES);
 
-    Key privateKey = settings.getPrivateKey();
+    Key privateKey = getPrivateKey();
 
     String token =
         Jwts.builder()
@@ -83,7 +84,7 @@ public class JwtTokenFactory {
     Integer Offset = settings.getRefreshTokenExpTime();
     Date refreshExpDate = CommonUtils.getCurrentTimeWithOffsetInUtc(Offset, ChronoUnit.MINUTES);
 
-    Key privateKey = settings.getPrivateKey();
+    Key privateKey = getPrivateKey();
 
     String token =
         Jwts.builder()
@@ -96,5 +97,13 @@ public class JwtTokenFactory {
             .compact();
 
     return new AccessJwtToken(token, claims);
+  }
+
+  public Key getPrivateKey() {
+    if (privateKey == null) {
+      String privateKeyPath = settings.getPrivateKeyPath();
+      privateKey = CommonUtils.getPrivateKey(privateKeyPath);
+    }
+    return privateKey;
   }
 }

@@ -17,19 +17,24 @@ import org.springframework.stereotype.Component;
 @ConditionalOnMissingBean(AuthenticateRequestMatcher.class)
 public class AuthenticateRequestMatcher implements RequestMatcher {
 
+  private static final String DEFAULT_AUTHENTICATION_FILTER = "/**";
+
   @Autowired private AuthenticationConfig authenticationConfig;
 
   private OrRequestMatcher matchers;
 
   @EventListener
   public void handleContextRefresh(ContextRefreshedEvent event) {
-    List<String> jwtPathToSkip = authenticationConfig.getJwtAuthenticationPath();
-    List<RequestMatcher> m =
-        jwtPathToSkip
+    List<String> authenticationPath = authenticationConfig.getAuthenticationPath();
+    List<RequestMatcher> reqMatcher =
+        authenticationPath
             .stream()
             .map(path -> new AntPathRequestMatcher(path))
             .collect(Collectors.toList());
-    matchers = new OrRequestMatcher(m);
+    if(authenticationPath.size() == 0){
+      reqMatcher.add(new AntPathRequestMatcher(DEFAULT_AUTHENTICATION_FILTER));
+    }
+    matchers = new OrRequestMatcher(reqMatcher);
   }
 
   @Override

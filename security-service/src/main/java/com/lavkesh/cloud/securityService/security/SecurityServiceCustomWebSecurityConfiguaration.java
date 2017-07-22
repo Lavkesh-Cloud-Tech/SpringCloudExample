@@ -1,12 +1,11 @@
 package com.lavkesh.cloud.securityService.security;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.lavkesh.cloud.security.auth.CustomAuthenticationFailureHandler;
+import com.lavkesh.cloud.security.config.CustomWebSecurityConfiguarationAdapter;
 import com.lavkesh.cloud.securityService.security.ajax.AjaxAuthenticationProvider;
 import com.lavkesh.cloud.securityService.security.ajax.AjaxAwareAuthenticationSuccessHandler;
 import com.lavkesh.cloud.securityService.security.ajax.AjaxLoginProcessingFilter;
 import com.lavkesh.cloud.securityService.security.ajax.AjaxRequestMatcher;
-import com.lavkesh.cloud.security.config.CustomWebSecurityConfiguarationAdapter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -19,22 +18,17 @@ import org.springframework.stereotype.Component;
 public class SecurityServiceCustomWebSecurityConfiguaration
     extends CustomWebSecurityConfiguarationAdapter {
 
-  @Autowired private CustomAuthenticationFailureHandler failureHandler;
+  @Autowired
+  private AjaxRequestMatcher ajaxRequestMatcher;
 
-  @Autowired private AjaxRequestMatcher ajaxRequestMatcher;
-  @Autowired private AjaxAuthenticationProvider ajaxAuthenticationProvider;
-  @Autowired private AjaxAwareAuthenticationSuccessHandler successHandler;
+  @Autowired
+  private AjaxAuthenticationProvider ajaxAuthenticationProvider;
 
-  @Autowired private AuthenticationManager authenticationManager;
-  @Autowired private ObjectMapper objectMapper;
+  @Autowired
+  private AjaxAwareAuthenticationSuccessHandler successHandler;
 
-  protected AjaxLoginProcessingFilter buildAjaxLoginProcessingFilter() throws Exception {
-    AjaxLoginProcessingFilter filter =
-        new AjaxLoginProcessingFilter(
-            successHandler, failureHandler, objectMapper, ajaxRequestMatcher);
-    filter.setAuthenticationManager(this.authenticationManager);
-    return filter;
-  }
+  @Autowired
+  private ObjectMapper objectMapper;
 
   @Override
   public void configure(AuthenticationManagerBuilder auth) {
@@ -50,5 +44,16 @@ public class SecurityServiceCustomWebSecurityConfiguaration
   public void addFilterBefore(HttpSecurity http) throws Exception {
     AjaxLoginProcessingFilter ajaxLoginProcessingFilter = buildAjaxLoginProcessingFilter();
     http.addFilterBefore(ajaxLoginProcessingFilter, UsernamePasswordAuthenticationFilter.class);
+  }
+
+  protected AjaxLoginProcessingFilter buildAjaxLoginProcessingFilter() throws Exception {
+    AuthenticationManager authenticationManager = getAuthenticationManager();
+    AuthenticationFailureHandler failureHandler = getFailureHandler();
+
+    AjaxLoginProcessingFilter filter =
+        new AjaxLoginProcessingFilter(
+            successHandler, failureHandler, objectMapper, ajaxRequestMatcher);
+    filter.setAuthenticationManager(authenticationManager);
+    return filter;
   }
 }

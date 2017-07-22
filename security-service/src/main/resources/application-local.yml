@@ -25,16 +25,13 @@ application:
 lavkesh:
   security:
     enabled: true
-    jwt-path-to-skip:
-      - '/login'
-      - '/logout'
-    jwt-authentication-path:
-      - '/**'
-    ajax-authentication-path:
-      - '/login'
-    jwt:
+    anonymous-path:
+      - '/usernameAndPassword'
+    publicKeyPath: 'pubkey.der'
+    ajax:
+      authentication-path:
+        - '/login'
       tokenExpirationTime: 5
       refreshTokenExpTime: 10
       tokenIssuer: 'Security Service'
       privateKeyPath: 'privatekey.der'
-      publicKeyPath: 'pubkey.der'
