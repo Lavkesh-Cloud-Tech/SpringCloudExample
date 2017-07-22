@@ -37,6 +37,7 @@ public class JwtAuthenticationProvider implements AuthenticationProvider {
     Jws<Claims> jwsClaims = rawAccessToken.parseClaims(publicKey);
 
     UserContext context = createUserContext(jwsClaims);
+    context.setJwtToken(rawAccessToken);
 
     return new JwtAuthenticationToken(context, context.getAuthorities());
   }

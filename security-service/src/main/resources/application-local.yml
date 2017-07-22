@@ -1,10 +1,19 @@
 server:
   port: 8764
 
-# Disable Eureka server
+# Eureka Server Settings
 eureka:
+  instance:
+    lease-renewal-interval-in-seconds: 20
+    lease-expiration-duration-in-seconds: 60
+    hostname: localhost
   client:
-    enabled: false
+    registry-fetch-interval-seconds: 20
+    serviceUrl:
+      defaultZone: http://${REGISTRY_USERNAME}:${REGISTRY_PASSWORD}@localhost:8761/registry/eureka/
+
+REGISTRY_USERNAME: eureka
+REGISTRY_PASSWORD: password
 
 # Management Configuration
 management:
@@ -15,13 +24,11 @@ endpoints:
   enabled: true
   sensitive: false
 
-test-service:
-  ribbon.listOfServers: http://localhost:8763
-
 application:
   username: user
   password: password
 
+#Security Settings
 lavkesh:
   security:
     enabled: true
@@ -35,3 +42,6 @@ lavkesh:
       refreshTokenExpTime: 10
       tokenIssuer: 'Security Service'
       privateKeyPath: 'privatekey.der'
+
+hystrix:
+  shareSecurityContext: true

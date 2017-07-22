@@ -48,10 +48,10 @@ public class JwtTokenAuthenticationProcessingFilter extends AbstractAuthenticati
       FilterChain chain,
       Authentication authResult)
       throws IOException, ServletException {
-    SecurityContext context = SecurityContextHolder.createEmptyContext();
-    context.setAuthentication(authResult);
-    SecurityContextHolder.setContext(context);
+
+    SecurityContextHolder.getContext().setAuthentication(authResult);
     chain.doFilter(request, response);
+
   }
 
   @Override

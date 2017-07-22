@@ -17,19 +17,31 @@ import org.springframework.stereotype.Component;
 @ConditionalOnMissingBean(AnonymousRequestMatcher.class)
 public class AnonymousRequestMatcher implements RequestMatcher {
 
+  private static final String DEFAULT_ANONYMOUS_FILTER = "/DEFAULT_ANONYMOUS_FILTER/**";
+
   @Autowired
   private AuthenticationConfig authenticationConfig;
   private OrRequestMatcher matchers;
 
   @EventListener
   public void handleContextRefresh(ContextRefreshedEvent event) {
+    List<RequestMatcher> matcher = getRequestMatcher(authenticationConfig);
+    matchers = new OrRequestMatcher(matcher);
+  }
+
+  public static final List<RequestMatcher> getRequestMatcher(
+      AuthenticationConfig authenticationConfig) {
     List<String> anonymousPath = authenticationConfig.getAnonymousPath();
-    List<RequestMatcher> m =
+    List<RequestMatcher> matcher =
         anonymousPath
             .stream()
             .map(path -> new AntPathRequestMatcher(path))
             .collect(Collectors.toList());
-    matchers = new OrRequestMatcher(m);
+
+    if (anonymousPath.size() == 0) {
+      matcher.add(new AntPathRequestMatcher(DEFAULT_ANONYMOUS_FILTER));
+    }
+    return matcher;
   }
 
   @Override

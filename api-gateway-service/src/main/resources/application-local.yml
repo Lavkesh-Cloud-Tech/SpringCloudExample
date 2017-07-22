@@ -1,10 +1,19 @@
 server:
   port: 8765
 
-# Disable Eureka server
+# Eureka Server Settings
 eureka:
+  instance:
+    lease-renewal-interval-in-seconds: 20
+    lease-expiration-duration-in-seconds: 60
+    hostname: localhost
   client:
-    enabled: false
+    registry-fetch-interval-seconds: 20
+    serviceUrl:
+      defaultZone: http://${REGISTRY_USERNAME}:${REGISTRY_PASSWORD}@localhost:8761/registry/eureka/
+
+REGISTRY_USERNAME: eureka
+REGISTRY_PASSWORD: password
 
 # Management Configuration
 management:
@@ -17,21 +26,24 @@ endpoints:
 
 # Zuul Proxy settings
 zuul:
+  strip-prefix: false
   ignored-services: 'config-server'
   sensitive-headers:
   routes:
     security-service:
+      serviceId: security-service
       path: /security-service/**
-      url: http://localhost:8764
       stripPrefix: false
     test-service:
+      serviceId: test-service
       path: /test-service/**
-      url: http://localhost:8763
       stripPrefix: false
 
-authentication:
-  jwt-path-to-skip:
-    - '${server.context-path}/security-service/login'
-    - '${server.context-path}/security-service/logout'
-  jwt-authentication-path:
-    - '${server.context-path}/**'
+#Security Configuration
+lavkesh:
+  security:
+    enabled: true
+    anonymous-path:
+      - '/security-service/usernameAndPassword'
+      - '/security-service/login'
+    publicKeyPath: 'pubkey.der'

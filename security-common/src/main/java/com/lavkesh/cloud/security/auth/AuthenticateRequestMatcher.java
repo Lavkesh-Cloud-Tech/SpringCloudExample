@@ -19,22 +19,30 @@ public class AuthenticateRequestMatcher implements RequestMatcher {
 
   private static final String DEFAULT_AUTHENTICATION_FILTER = "/**";
 
-  @Autowired private AuthenticationConfig authenticationConfig;
+  @Autowired
+  private AuthenticationConfig authenticationConfig;
 
   private OrRequestMatcher matchers;
 
   @EventListener
   public void handleContextRefresh(ContextRefreshedEvent event) {
-    List<String> authenticationPath = authenticationConfig.getAuthenticationPath();
-    List<RequestMatcher> reqMatcher =
-        authenticationPath
+    List<RequestMatcher> reqMatcher = getRequestMatcher(authenticationConfig);
+    matchers = new OrRequestMatcher(reqMatcher);
+  }
+
+  public static final List<RequestMatcher> getRequestMatcher(
+      AuthenticationConfig authenticationConfig) {
+    List<String> anonymousPath = authenticationConfig.getAuthenticationPath();
+    List<RequestMatcher> matcher =
+        anonymousPath
             .stream()
             .map(path -> new AntPathRequestMatcher(path))
             .collect(Collectors.toList());
-    if(authenticationPath.size() == 0){
-      reqMatcher.add(new AntPathRequestMatcher(DEFAULT_AUTHENTICATION_FILTER));
+
+    if (anonymousPath.size() == 0) {
+      matcher.add(new AntPathRequestMatcher(DEFAULT_AUTHENTICATION_FILTER));
     }
-    matchers = new OrRequestMatcher(reqMatcher);
+    return matcher;
   }
 
   @Override

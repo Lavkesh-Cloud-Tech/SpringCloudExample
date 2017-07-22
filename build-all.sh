@@ -1,6 +1,8 @@
 #!/bin/bash
 
 function buildPoject() {
+  echo ""
+  echo ""
   local arg=$1
   echo "Building $arg"
   buildArray=(`echo $arg | sed 's/:/\n/g'`)

@@ -13,3 +13,6 @@ management:
 endpoints:
   enabled: true
   sensitive: false
+
+REGISTRY_USERNAME: eureka
+REGISTRY_PASSWORD: password

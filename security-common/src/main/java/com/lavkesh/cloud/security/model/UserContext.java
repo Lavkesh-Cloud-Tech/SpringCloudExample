@@ -5,8 +5,10 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.security.core.GrantedAuthority;
 
 public class UserContext {
+
   private final String username;
   private final Collection<GrantedAuthority> authorities;
+  private JwtToken jwtToken;
 
   private UserContext(String username, Collection<GrantedAuthority> authorities) {
     this.username = username;
@@ -14,8 +16,9 @@ public class UserContext {
   }
 
   public static UserContext create(String username, Collection<GrantedAuthority> authorities) {
-    if (StringUtils.isBlank(username))
+    if (StringUtils.isBlank(username)) {
       throw new IllegalArgumentException("Username is blank: " + username);
+    }
     return new UserContext(username, authorities);
   }
 
@@ -25,5 +28,13 @@ public class UserContext {
 
   public Collection<GrantedAuthority> getAuthorities() {
     return authorities;
+  }
+
+  public void setJwtToken(JwtToken token) {
+    this.jwtToken = token;
+  }
+
+  public JwtToken getJwtToken() {
+    return jwtToken;
   }
 }
