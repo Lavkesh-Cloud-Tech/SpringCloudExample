@@ -1,30 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
 
-  <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
-
-  <springProperty scope="context" name="LOG_FILE_NAME_PREFIX" source="spring.application.name"/>
-  <property name="LOG_FILE" value="${LOG_PATH:-/var/app_log}/application-${LOG_FILE_NAME_PREFIX}.log"/>
-
-  <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
-    <!-- configure filter to limit console output -->
-    <encoder>
-      <pattern>${CONSOLE_LOG_PATTERN}</pattern>
-      <charset>utf8</charset>
-    </encoder>
-  </appender>
-
-  <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-    <encoder>
-      <pattern>${FILE_LOG_PATTERN}</pattern>
-    </encoder>
-    <file>${LOG_FILE}</file>
-    <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
-      <fileNamePattern>${LOG_FILE}.%d{yyyy-MM-dd}.%i.gz</fileNamePattern>
-      <maxFileSize>10MB</maxFileSize>
-      <maxHistory>90</maxHistory>
-    </rollingPolicy>
-  </appender>
+  <!-- Include lavkesh cloud logback appender -->
+  <include resource="lavkesh-cloud-logback.xml" />
 
   <springProfile name="local, dev, qa">
     <!-- Setting the com.lavkesh.cloud level of logging to DEBUG -->
@@ -50,5 +28,10 @@
   <root level="INFO">
     <appender-ref ref="CONSOLE"/>
     <appender-ref ref="FILE"/>
+    <if condition='${SPRING_CLOUD_BUS_ENABLE:-false}'>
+      <then>
+        <appender-ref ref="AMQP"/>
+      </then>
+    </if>
   </root>
 </configuration>

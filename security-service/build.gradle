@@ -43,7 +43,7 @@ dependencyManagement {
 }
 
 dependencies {
-    compile 'lavkesh.spring-cloud-tech:security-common:1.0'
+    compile 'lavkesh.spring-cloud-tech:security-common:1.0.+'
 
     compile 'org.springframework.boot:spring-boot-starter-web'
     compile 'org.springframework.cloud:spring-cloud-starter-feign'

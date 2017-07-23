@@ -1,2 +1,5 @@
 server:
   context-path: /api
+
+logging:
+  config: com/lavkesh/cloud/logback-spring.xml

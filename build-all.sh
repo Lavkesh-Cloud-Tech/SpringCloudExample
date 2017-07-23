@@ -15,6 +15,8 @@ function buildPoject() {
 }
 
 version=$1
+buildPoject rabbitmq-server:$version
+buildPoject security-common:$version
 buildPoject eureka-server:$version
 buildPoject config-server:$version
 buildPoject test-service:$version

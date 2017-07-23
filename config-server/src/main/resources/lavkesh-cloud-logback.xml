@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<included>
+
+  <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+
+  <springProperty scope="context" name="SPRING_APPLICATION_NAME" source="spring.application.name"/>
+  <springProperty scope="context" name="SPRING_CLOUD_BUS_ENABLE" source="spring.cloud.bus.enabled"/>
+  <property name="LOG_FILE"  value="${LOG_PATH:-/var/app_log}/application-${SPRING_APPLICATION_NAME}.log"/>
+
+  <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+    <!-- configure filter to limit console output -->
+    <encoder>
+      <pattern>${CONSOLE_LOG_PATTERN}</pattern>
+      <charset>utf8</charset>
+    </encoder>
+  </appender>
+
+  <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <encoder>
+      <pattern>${FILE_LOG_PATTERN}</pattern>
+    </encoder>
+    <file>${LOG_FILE}</file>
+    <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+      <fileNamePattern>${LOG_FILE}.%d{yyyy-MM-dd}.%i.gz</fileNamePattern>
+      <maxFileSize>10MB</maxFileSize>
+      <maxHistory>90</maxHistory>
+    </rollingPolicy>
+  </appender>
+
+  <if condition='${SPRING_CLOUD_BUS_ENABLE:-false}'>
+    <then>
+      <appender name="AMQP" class="org.springframework.amqp.rabbit.logback.AmqpAppender">
+        <layout>
+          <pattern>
+            {
+            "time": "%date{ISO8601}",
+            "severity": "%level",
+            "service": "${SPRING_APPLICATION_NAME:-}",
+            "trace": "%X{X-B3-TraceId:-}",
+            "span": "%X{X-B3-SpanId:-}",
+            "parent": "%X{X-B3-ParentSpanId:-}",
+            "exportable": "%X{X-Span-Export:-}",
+            "pid": "${PID:-}",
+            "thread": "%thread",
+            "class": "%logger{40}",
+            "rest": "%message"
+            }
+          </pattern>
+        </layout>
+
+        <!-- RabbitMQ connection -->
+        <host>${spring.rabbitmq.host}</host>
+        <port>${spring.rabbitmq.port}</port>
+        <username>${spring.rabbitmq.username}</username>
+        <password>${spring.rabbitmq.password}</password>
+
+        <applicationId>api-service-4</applicationId>
+        <routingKeyPattern>api-service-4</routingKeyPattern>
+        <declareExchange>true</declareExchange>
+        <exchangeType>direct</exchangeType>
+        <exchangeName>ex_logstash</exchangeName>
+
+        <generateId>true</generateId>
+        <charset>UTF-8</charset>
+        <durable>true</durable>
+        <deliveryMode>PERSISTENT</deliveryMode>
+      </appender>
+    </then>
+  </if>
+</included>
