@@ -22,3 +22,6 @@ security:
   user:
     name: ${REGISTRY_USERNAME}
     password: ${REGISTRY_PASSWORD}
+
+logging:
+  config: classpath:com/lavkesh/cloud/logback-spring.xml

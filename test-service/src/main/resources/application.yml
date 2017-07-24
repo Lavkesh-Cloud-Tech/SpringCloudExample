@@ -2,4 +2,4 @@ server:
   context-path: /test-service
 
 logging:
-  config: com/lavkesh/cloud/logback-spring.xml
+  config: classpath:com/lavkesh/cloud/logback-spring.xml

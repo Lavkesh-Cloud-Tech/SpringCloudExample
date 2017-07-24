@@ -2,7 +2,7 @@
 <configuration>
 
   <!-- Include lavkesh cloud logback appender -->
-  <include resource="lavkesh-cloud-logback.xml" />
+  <include resource="com/lavkesh/cloud/lavkesh-cloud-logback.xml"/>
 
   <springProfile name="local, dev, qa">
     <!-- Setting the com.lavkesh.cloud level of logging to DEBUG -->
@@ -28,10 +28,6 @@
   <root level="INFO">
     <appender-ref ref="CONSOLE"/>
     <appender-ref ref="FILE"/>
-    <if condition='${SPRING_CLOUD_BUS_ENABLE:-false}'>
-      <then>
-        <appender-ref ref="AMQP"/>
-      </then>
-    </if>
+    <appender-ref ref="AMQP"/>
   </root>
 </configuration>

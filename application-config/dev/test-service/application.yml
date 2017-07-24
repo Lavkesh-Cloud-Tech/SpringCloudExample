@@ -1,3 +1,6 @@
 lavkesh:
   application:
     name: Dev - Spring Cloud Demo 3
+  security:
+    enabled: true
+    publicKeyPath: 'pubkey.der'

@@ -1,3 +1,18 @@
 application:
   username: lavkesh5
   password: lavkesh@123
+
+#Security Settings
+lavkesh:
+  security:
+    enabled: true
+    anonymousPath:
+      - '/usernameAndPassword'
+    publicKeyPath: 'pubkey.der'
+    ajax:
+      authenticationPath:
+        - '/login'
+      tokenExpirationTime: 5
+      refreshTokenExpTime: 10
+      tokenIssuer: 'Security Service'
+      privateKeyPath: 'privatekey.der'

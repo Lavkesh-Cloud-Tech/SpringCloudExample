@@ -5,3 +5,6 @@ endpoints:
   bus:
     enabled: true
     sensitive: false
+
+logging:
+  config: classpath:com/lavkesh/cloud/logback-spring.xml

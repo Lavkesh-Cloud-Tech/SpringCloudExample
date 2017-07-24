@@ -3,18 +3,18 @@ version: '2'
 services:
 
   rabbitmq-server:
-    image: "lavkesh/rabbitmq-server:${RABBITMQ_IMAGE_VERSION}"
+    image: "lavkesh/rabbitmq-server:${IMAGE_VERSION}"
     ports:
       - "5672"
       - "15672"
     environment:
       - RABBITMQ_USERNAME
-      - RABBITMQ_PASSWORD_HASH
+      - RABBITMQ_PASSWORD
     networks:
       - my-network
 
   eureka-server:
-    image: "lavkesh/eureka-server:${EUREKA_IMAGE_VERSION}"
+    image: "lavkesh/eureka-server:${IMAGE_VERSION}"
     ports:
       - "8080"
     environment:
@@ -26,7 +26,7 @@ services:
       - my-network
 
   config-server:
-    image: "lavkesh/config-server:${CONFIG_SERVER_IMAGE_VERSION}"
+    image: "lavkesh/config-server:${IMAGE_VERSION}"
     ports:
       - "8080"
       - "9080"
@@ -36,12 +36,12 @@ services:
       - GIT_CONFIG_URL
       - REGISTRY_USERNAME
       - REGISTRY_PASSWORD
-      - CONFIG_LABEL=ELK_stack
+      - CONFIG_LABEL
     networks:
       - my-network
 
   test-service-app:
-    image: "lavkesh/test-service:${TEST_SERVICE_IMAGE_VERSION}"
+    image: "lavkesh/test-service:${IMAGE_VERSION}"
     ports:
       - "8080"
       - "9080"
@@ -52,7 +52,7 @@ services:
       - my-network
 
   security-service-app:
-    image: "lavkesh/security-service:${SECURITY_SERVICE_IMAGE_VERSION}"
+    image: "lavkesh/security-service:${IMAGE_VERSION}"
     ports:
       - "8080"
       - "9080"
@@ -63,7 +63,7 @@ services:
       - my-network
 
   api-gateway-service-app:
-    image: "lavkesh/api-gateway-service:${API_GATEWAY_SERVICE_IMAGE_VERSION}"
+    image: "lavkesh/api-gateway-service:${IMAGE_VERSION}"
     ports:
       - "8080"
       - "9080"

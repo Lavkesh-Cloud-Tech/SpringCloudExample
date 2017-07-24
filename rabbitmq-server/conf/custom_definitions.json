@@ -3,8 +3,7 @@
   "users": [
     {
       "name": "RABBITMQ_USERNAME",
-      "password_hash": "RABBITMQ_PASSWORD_HASH",
-      "hashing_algorithm": "rabbit_password_hashing_sha256",
+      "password": "RABBITMQ_PASSWORD",
       "tags": "administrator"
     }
   ],
@@ -24,7 +23,28 @@
   ],
   "parameters": [],
   "policies": [],
-  "exchanges": [],
-  "queues": [],
-  "bindings": []
+  "exchanges": [{
+    "name": "ex_logstash",
+    "vhost": "/",
+    "type": "direct",
+    "durable": true,
+    "auto_delete": false,
+    "internal": false,
+    "arguments": {}
+  }],
+  "queues": [{
+    "name": "application-logs-queue",
+    "vhost": "/",
+    "durable": true,
+    "auto_delete": false,
+    "arguments": { }
+  }],
+  "bindings": [{
+    "source": "ex_logstash",
+    "vhost": "/",
+    "destination": "application-logs-queue",
+    "destination_type": "queue",
+    "routing_key": "api-log-key",
+    "arguments": {}
+  }]
 }

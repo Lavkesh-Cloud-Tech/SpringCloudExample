@@ -32,11 +32,11 @@ application:
 lavkesh:
   security:
     enabled: true
-    anonymous-path:
+    anonymousPath:
       - '/usernameAndPassword'
     publicKeyPath: 'pubkey.der'
     ajax:
-      authentication-path:
+      authenticationPath:
         - '/login'
       tokenExpirationTime: 5
       refreshTokenExpTime: 10

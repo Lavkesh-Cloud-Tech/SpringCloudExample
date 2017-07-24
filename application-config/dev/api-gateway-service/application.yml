@@ -11,3 +11,12 @@ zuul:
       serviceId: test-service
       path: /test-service/**
       stripPrefix: false
+
+#Security Configuration
+lavkesh:
+  security:
+    enabled: true
+    anonymous-path:
+      - '/security-service/usernameAndPassword'
+      - '/security-service/login'
+    publicKeyPath: 'pubkey.der'
