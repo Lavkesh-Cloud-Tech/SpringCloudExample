@@ -15,4 +15,4 @@ lavkesh:
       tokenExpirationTime: 5
       refreshTokenExpTime: 10
       tokenIssuer: 'Security Service'
-      privateKeyPath: 'privatekey.der'
+      privateKeyPath: classpath:privatekey.der
