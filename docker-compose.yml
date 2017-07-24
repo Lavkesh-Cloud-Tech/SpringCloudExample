@@ -13,6 +13,14 @@ services:
     networks:
       - my-network
 
+  logtash-server:
+    image: "lavkesh/logtash-server:${IMAGE_VERSION}"
+    environment:
+      - RABBITMQ_USERNAME
+      - RABBITMQ_PASSWORD
+    networks:
+      - my-network
+
   eureka-server:
     image: "lavkesh/eureka-server:${IMAGE_VERSION}"
     ports:
