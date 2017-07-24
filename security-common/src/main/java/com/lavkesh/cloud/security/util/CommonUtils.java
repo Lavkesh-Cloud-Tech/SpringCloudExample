@@ -1,10 +1,9 @@
 package com.lavkesh.cloud.security.util;
 
+import java.io.FileInputStream;
 import java.io.IOException;
-import java.net.URISyntaxException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.io.InputStream;
+import java.net.URL;
 import java.security.Key;
 import java.security.KeyFactory;
 import java.security.NoSuchAlgorithmException;
@@ -18,6 +17,9 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.security.authentication.AuthenticationServiceException;
+import org.springframework.util.ClassUtils;
+import org.springframework.util.ResourceUtils;
+import org.springframework.util.StreamUtils;
 
 public class CommonUtils {
 
@@ -50,15 +52,15 @@ public class CommonUtils {
   }
 
   public static Key getPrivateKey(String privateKeyPath) throws RuntimeException {
-    try {
-      Path path = Paths.get(ClassLoader.getSystemResource(privateKeyPath).toURI());
-      byte[] keyBytes = Files.readAllBytes(path);
+    ClassLoader defaultClassLoader = ClassUtils.getDefaultClassLoader();
+    try (InputStream in = defaultClassLoader.getResourceAsStream(privateKeyPath)) {
+      byte[] keyBytes = StreamUtils.copyToByteArray(in);
+      logger.debug("privateKeyPath =          " + keyBytes);
 
       PKCS8EncodedKeySpec spec = new PKCS8EncodedKeySpec(keyBytes);
       KeyFactory kf = KeyFactory.getInstance("RSA");
       return kf.generatePrivate(spec);
-    } catch (URISyntaxException
-        | IOException
+    } catch (IOException
         | NoSuchAlgorithmException
         | InvalidKeySpecException e) {
       logger.error("Error in JwtSettings.getPrivateKey", e);
@@ -67,15 +69,15 @@ public class CommonUtils {
   }
 
   public static Key getPublicKey(String publicKeyPath) throws RuntimeException {
-    try {
-      Path path = Paths.get(ClassLoader.getSystemResource(publicKeyPath).toURI());
-      byte[] keyBytes = Files.readAllBytes(path);
+    ClassLoader defaultClassLoader = ClassUtils.getDefaultClassLoader();
+    try (InputStream in = defaultClassLoader.getResourceAsStream(publicKeyPath)) {
+      byte[] keyBytes = StreamUtils.copyToByteArray(in);
+      logger.debug("publicKeyPath =          " + keyBytes);
 
       X509EncodedKeySpec spec = new X509EncodedKeySpec(keyBytes);
       KeyFactory kf = KeyFactory.getInstance("RSA");
       return kf.generatePublic(spec);
-    } catch (URISyntaxException
-        | IOException
+    } catch (IOException
         | NoSuchAlgorithmException
         | InvalidKeySpecException e) {
       logger.error("Error in JwtSettings.getPublicKey", e);
