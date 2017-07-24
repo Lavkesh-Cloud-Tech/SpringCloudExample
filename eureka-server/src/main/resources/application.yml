@@ -2,6 +2,13 @@ server:
   port: 8080
   context-path: /registry
 
+spring:
+  cloud:
+    # Disable RabbitMQ Server Configuration
+    bus:
+      enabled: false
+
+
 # Eureka Server Settings
 eureka:
   instance:

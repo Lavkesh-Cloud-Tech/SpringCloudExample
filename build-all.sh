@@ -23,3 +23,5 @@ buildPoject test-service:$version
 buildPoject security-service:$version
 buildPoject api-gateway-service:$version
 
+echo "\nRemoving dangling images"
+docker rmi -f $(docker images -a -f "dangling=true" -q)

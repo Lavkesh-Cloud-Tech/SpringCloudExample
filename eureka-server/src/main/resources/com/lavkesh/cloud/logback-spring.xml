@@ -9,8 +9,8 @@
     <logger name="com.lavkesh.cloud" level="DEBUG"/>
 
     <!-- Setting the com.springframework level of logging to DEBUG -->
-    <logger name="org.springframework.web" level="INFO"/>
-    <logger name="org.springframework.cloud.netflix.eureka" level="DEBUG"/>
+    <logger name="org.springframework.web" level="DEBUG"/>
+    <logger name="org.springframework.cloud" level="INFO"/>
     <logger name="org.springframework.boot.actuate" level="DEBUG"/>
   </springProfile>
 
@@ -20,7 +20,7 @@
 
     <!-- Setting the com.springframework level of logging to INFO -->
     <logger name="org.springframework.web" level="INFO"/>
-    <logger name="org.springframework.cloud.netflix.eureka" level="INFO"/>
+    <logger name="org.springframework.cloud" level="INFO"/>
     <logger name="org.springframework.boot.actuate" level="INFO"/>
   </springProfile>
 
