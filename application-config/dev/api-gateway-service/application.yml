@@ -17,5 +17,6 @@ lavkesh:
   security:
     enabled: true
     anonymous-path:
+      - '/security-service/usernameAndPassword'
       - '/security-service/login'
     publicKeyPath: 'pubkey.der'
