@@ -16,6 +16,7 @@ function buildPoject() {
 
 version=$1
 buildPoject rabbitmq-server:$version
+buildPoject logtash-server:$version
 buildPoject security-common:$version
 buildPoject eureka-server:$version
 buildPoject config-server:$version
@@ -23,5 +24,6 @@ buildPoject test-service:$version
 buildPoject security-service:$version
 buildPoject api-gateway-service:$version
 
-echo "\nRemoving dangling images"
+echo ""
+echo "Removing dangling images"
 docker rmi -f $(docker images -a -f "dangling=true" -q)

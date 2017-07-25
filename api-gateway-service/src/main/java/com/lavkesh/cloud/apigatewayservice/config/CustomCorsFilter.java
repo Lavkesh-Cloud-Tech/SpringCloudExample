@@ -1,4 +1,4 @@
-package com.lavkesh.cloud.security;
+package com.lavkesh.cloud.apigatewayservice.config;
 
 import java.util.Arrays;
 import org.springframework.web.cors.CorsConfiguration;
@@ -7,9 +7,6 @@ import org.springframework.web.filter.CorsFilter;
 
 /**
  * CustomCorsFilter
- *
- * @author vladimir.stankovic
- *     <p>Aug 3, 2016
  */
 public class CustomCorsFilter extends CorsFilter {
 

@@ -2,6 +2,25 @@ version: '2'
 
 services:
 
+  elasticsearch-server:
+    image: "elasticsearch:5.5"
+    ports:
+      - 9200
+      - 9300
+    environment:  
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    networks:
+      - my-network
+
+  kibana-server:
+    image: "kibana:5.5"
+    ports:
+      - 5601:5601
+    environment:
+      - ELASTICSEARCH_URL=http://elasticsearch-server:9200
+    networks:
+      - my-network
+
   rabbitmq-server:
     image: "lavkesh/rabbitmq-server:${IMAGE_VERSION}"
     ports:
