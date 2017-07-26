@@ -3,10 +3,8 @@ package com.lavkesh.cloud.security.config;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.cloud.context.config.annotation.RefreshScope;
 
 @ConfigurationProperties(prefix = "lavkesh.security")
-@RefreshScope
 public class AuthenticationConfig {
 
   private boolean enableJwtAuthentication = true;

@@ -27,40 +27,42 @@
     </rollingPolicy>
   </appender>
 
-  <appender name="AMQP" class="org.springframework.amqp.rabbit.logback.AmqpAppender">
-    <layout>
-      <pattern>
-        {
-        "time": "%date{ISO8601}",
-        "severity": "%level",
-        "service": "${SPRING_APPLICATION_NAME:-}",
-        "trace": "%X{X-B3-TraceId:-}",
-        "span": "%X{X-B3-SpanId:-}",
-        "parent": "%X{X-B3-ParentSpanId:-}",
-        "exportable": "%X{X-Span-Export:-}",
-        "pid": "${PID:-}",
-        "thread": "%thread",
-        "class": "%logger{40}",
-        "rest": "%message"
-        }
-      </pattern>
-    </layout>
+  <springProfile name="!local">
+    <appender name="AMQP" class="org.springframework.amqp.rabbit.logback.AmqpAppender">
+      <layout>
+        <pattern>
+          {
+          "time": "%date{ISO8601}",
+          "severity": "%level",
+          "service": "${SPRING_APPLICATION_NAME:-}",
+          "trace": "%X{X-B3-TraceId:-}",
+          "span": "%X{X-B3-SpanId:-}",
+          "parent": "%X{X-B3-ParentSpanId:-}",
+          "exportable": "%X{X-Span-Export:-}",
+          "pid": "${PID:-}",
+          "thread": "%thread",
+          "class": "%logger{40}",
+          "rest": "%message"
+          }
+        </pattern>
+      </layout>
 
-    <!-- RabbitMQ connection -->
-    <host>rabbitmq-server</host>
-    <port>5672</port>
-    <username>rabbitmq</username>
-    <password>password</password>
+      <!-- RabbitMQ connection -->
+      <host>rabbitmq-server</host>
+      <port>5672</port>
+      <username>rabbitmq</username>
+      <password>password</password>
 
-    <applicationId>${spring.application.name}</applicationId>
-    <routingKeyPattern>api-log-key</routingKeyPattern>
-    <declareExchange>true</declareExchange>
-    <exchangeType>direct</exchangeType>
-    <exchangeName>ex_logstash</exchangeName>
+      <applicationId>${spring.application.name}</applicationId>
+      <routingKeyPattern>api-log-key</routingKeyPattern>
+      <declareExchange>true</declareExchange>
+      <exchangeType>direct</exchangeType>
+      <exchangeName>ex_logstash</exchangeName>
 
-    <generateId>true</generateId>
-    <charset>UTF-8</charset>
-    <durable>true</durable>
-    <deliveryMode>PERSISTENT</deliveryMode>
-  </appender>
+      <generateId>true</generateId>
+      <charset>UTF-8</charset>
+      <durable>true</durable>
+      <deliveryMode>PERSISTENT</deliveryMode>
+    </appender>
+  </springProfile>
 </included>

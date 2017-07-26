@@ -3,12 +3,8 @@ package com.lavkesh.cloud.securityService.security.model;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.cloud.context.config.annotation.RefreshScope;
-import org.springframework.stereotype.Component;
 
-@Component
 @ConfigurationProperties(prefix = "lavkesh.security.ajax")
-@RefreshScope
 public class AjaxAuthenticationConfig {
 
   private boolean enable = true;

@@ -23,6 +23,8 @@ management:
 endpoints:
   enabled: true
   sensitive: false
+  refresh:
+    sensitive: false
 
 application:
   username: user
@@ -34,6 +36,7 @@ lavkesh:
     enabled: true
     anonymousPath:
       - '/usernameAndPassword'
+      - '/manage/**'
     publicKeyPath: 'pubkey.der'
     ajax:
       authenticationPath:

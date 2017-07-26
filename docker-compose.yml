@@ -24,8 +24,8 @@ services:
   rabbitmq-server:
     image: "lavkesh/rabbitmq-server:${IMAGE_VERSION}"
     ports:
-      - "5672"
-      - "15672"
+      - 5672
+      - 15672
     environment:
       - RABBITMQ_USERNAME
       - RABBITMQ_PASSWORD
@@ -43,7 +43,7 @@ services:
   eureka-server:
     image: "lavkesh/eureka-server:${IMAGE_VERSION}"
     ports:
-      - "8080"
+      - 8080
     environment:
       - APPLICATION_NAME=eureka-server
       - SPRING_PROFILES_ACTIVE
@@ -55,8 +55,8 @@ services:
   config-server:
     image: "lavkesh/config-server:${IMAGE_VERSION}"
     ports:
-      - "8080"
-      - "9080"
+      - 8080
+      - 9080
     environment:
       - APPLICATION_NAME=config-server
       - SPRING_PROFILES_ACTIVE
@@ -70,8 +70,8 @@ services:
   test-service-app:
     image: "lavkesh/test-service:${IMAGE_VERSION}"
     ports:
-      - "8080"
-      - "9080"
+      - 8080
+      - 9080
     environment:
       - APPLICATION_NAME=test-service
       - SPRING_PROFILES_ACTIVE
@@ -81,8 +81,8 @@ services:
   security-service-app:
     image: "lavkesh/security-service:${IMAGE_VERSION}"
     ports:
-      - "8080"
-      - "9080"
+      - 8080
+      - 9080
     environment:
       - APPLICATION_NAME=security-service
       - SPRING_PROFILES_ACTIVE
@@ -92,8 +92,8 @@ services:
   api-gateway-service-app:
     image: "lavkesh/api-gateway-service:${IMAGE_VERSION}"
     ports:
-      - "8080"
-      - "9080"
+      - 8080
+      - 9080
     environment:
       - APPLICATION_NAME=api-gateway-service
       - SPRING_PROFILES_ACTIVE

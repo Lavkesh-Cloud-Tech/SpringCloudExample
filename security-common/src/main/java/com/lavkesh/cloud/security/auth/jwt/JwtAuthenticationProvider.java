@@ -10,21 +10,18 @@ import java.security.Key;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 
-@Component
-@ConditionalOnMissingBean(JwtAuthenticationProvider.class)
 public class JwtAuthenticationProvider implements AuthenticationProvider {
 
   @Autowired
-  private AuthenticationConfig jwtSettings;
+  private AuthenticationConfig authenticationConfig;
+
   private Key publicKey;
 
   @Override
@@ -62,7 +59,7 @@ public class JwtAuthenticationProvider implements AuthenticationProvider {
 
   public Key getPublicKey() {
     if (publicKey == null) {
-      String publicKeyPath = jwtSettings.getPublicKeyPath();
+      String publicKeyPath = authenticationConfig.getPublicKeyPath();
       publicKey = CommonUtils.getPublicKey(publicKeyPath);
     }
     return publicKey;

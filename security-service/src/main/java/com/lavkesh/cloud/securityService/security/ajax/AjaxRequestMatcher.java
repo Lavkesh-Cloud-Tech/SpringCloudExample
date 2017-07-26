@@ -3,9 +3,10 @@ package com.lavkesh.cloud.securityService.security.ajax;
 import com.lavkesh.cloud.securityService.security.model.AjaxAuthenticationConfig;
 import java.util.List;
 import java.util.stream.Collectors;
+import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.event.ContextRefreshedEvent;
+import org.springframework.cloud.context.scope.refresh.RefreshScopeRefreshedEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.security.web.util.matcher.OrRequestMatcher;
@@ -25,8 +26,8 @@ public class AjaxRequestMatcher implements RequestMatcher {
     this.ajaxAuthenticationConfig = ajaxAuthenticationConfig;
   }
 
-  @EventListener
-  public void handleContextRefresh(ContextRefreshedEvent event) {
+  @PostConstruct
+  public void init() {
     List<String> authenticationPath = ajaxAuthenticationConfig.getAuthenticationPath();
     List<RequestMatcher> m =
         authenticationPath
@@ -36,10 +37,15 @@ public class AjaxRequestMatcher implements RequestMatcher {
     matchers = new OrRequestMatcher(m);
   }
 
+  @EventListener
+  public void handleContextRefresh(RefreshScopeRefreshedEvent event) {
+    init();
+  }
+
   @Override
   public boolean matches(HttpServletRequest request) {
     boolean enable = ajaxAuthenticationConfig.isEnable();
-    if(!enable){
+    if (!enable) {
       return false;
     }
 
