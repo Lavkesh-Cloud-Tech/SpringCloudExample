@@ -3,4 +3,6 @@ lavkesh:
     name: Dev - Spring Cloud Demo 3
   security:
     enabled: true
+    anonymousPath:
+      - '/applicationName'
     publicKeyPath: 'pubkey.der'
