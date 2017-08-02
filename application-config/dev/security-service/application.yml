@@ -8,6 +8,7 @@ lavkesh:
     enabled: true
     anonymousPath:
       - '/usernameAndPassword'
+      - '/applicationName'
     publicKeyPath: 'pubkey.der'
     ajax:
       authenticationPath:

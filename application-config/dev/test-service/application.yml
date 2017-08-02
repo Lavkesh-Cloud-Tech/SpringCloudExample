@@ -4,5 +4,5 @@ lavkesh:
   security:
     enabled: true
     anonymousPath:
-      - '/applicationName_aasa'
+      - '/applicationName'
     publicKeyPath: 'pubkey.der'
